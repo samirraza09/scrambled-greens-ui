@@ -2,6 +2,12 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 const Login = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
@@ -20,8 +26,7 @@ const Login = () => {
       });
 
       if (response.data.id) {
-        console.log('Logged In!!!')
-        setCurrentUser(response.data)
+        setCurrentUser(response.data);
         navigate('/home');
       } else {
         setError('Invalid username or password');
@@ -33,31 +38,75 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <label>
-          Username:
-          <input
-            type="text"
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        height: '100vh', // Set the height to 100% of the viewport height
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Paper
+        elevation={3}
+        sx={{
+          padding: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: '#52D3D8',
+        }}
+      >
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{ marginBottom: 3, color: '#200E3A' }}
+        >
+          Login
+        </Typography>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleLogin}
+          sx={{ width: '100%' }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
             type="password"
+            id="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ marginTop: 3, backgroundColor: '#4caf50', color: '#fff' }}
+          >
+            Login
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   );
 };
 
