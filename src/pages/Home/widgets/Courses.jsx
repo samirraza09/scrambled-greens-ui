@@ -8,13 +8,15 @@ const Courses = ({ courses }) => {
   };
 
   return (
-    <Card sx={{ borderRadius: 2, p: 2, bgcolor: '#52D3D8', position: 'relative' }}>
+    <Card sx={{ borderRadius: 2, p: 2, bgcolor: '#618264', position: 'relative' }}>
       {/* Add Course button in the top right */}
       <Button
         onClick={handleAddCourse}
         variant="contained"
         color="primary"
         sx={{
+          backgroundColor: '#4caf50', 
+          color: '#fff',
           position: 'absolute',
           top: 0,
           right: 0,
@@ -36,7 +38,7 @@ const Courses = ({ courses }) => {
               border: '1px solid #ccc',
               borderRadius: 2,
               p: 2,
-              bgcolor: '#3887BE',
+              bgcolor: '#6db073',
             }}
           >
             <Typography variant="h6">{course.name}</Typography>

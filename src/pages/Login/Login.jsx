@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-const Login = () => {
+const Login = ({ handleUserCookies }) => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +27,7 @@ const Login = () => {
 
       if (response.data.id) {
         setCurrentUser(response.data);
+        handleUserCookies(response.data)
         navigate('/home');
       } else {
         setError('Invalid username or password');
@@ -55,7 +56,7 @@ const Login = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: '#52D3D8',
+          backgroundColor: '#618264',
         }}
       >
         <Typography
