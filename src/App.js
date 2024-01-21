@@ -6,7 +6,7 @@ import { AuthContext } from './context';
 import { CookiesProvider, useCookies } from "react-cookie";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({username: 'refreshed'});
+  const [currentUser, setCurrentUser] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   const handleUserCookies = (user) => {
@@ -18,7 +18,7 @@ function App() {
       <AuthContext.Provider value={{currentUser, setCurrentUser}}>
         <Routes>
           <Route path="/login" element={<Login handleUserCookies={handleUserCookies}/>}/>
-          <Route path="/home" element={<Home removeCookie={removeCookie} userCookies={cookies.user}/>}/>
+          <Route path="/home" element={<Home handleUserCookies={handleUserCookies} removeCookie={removeCookie} userCookies={cookies.user}/>}/>
         </Routes>
       </AuthContext.Provider>
     </CookiesProvider>

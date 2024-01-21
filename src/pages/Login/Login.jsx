@@ -43,7 +43,7 @@ const Login = ({ handleUserCookies }) => {
       component="main"
       maxWidth="xs"
       sx={{
-        height: '100vh', // Set the height to 100% of the viewport height
+        height: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

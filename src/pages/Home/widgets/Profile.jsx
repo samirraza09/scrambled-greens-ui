@@ -9,6 +9,15 @@ const Profile = ({ currentUser, removeCookie }) => {
     removeCookie("user", { path: "/" })
     navigate('/login');
   }
+  if (!currentUser) {
+    return (
+      <Card sx={{ borderRadius: 2, p: 2, bgcolor: '#618264', position: 'relative' }}>
+      <CardContent>
+        <Typography variant="h4">Loading</Typography>
+      </CardContent>
+    </Card>
+    )
+  }
   return (
     <Card sx={{ borderRadius: 2, p: 2, bgcolor: '#618264', position: 'relative' }}>
       <Button
@@ -30,10 +39,10 @@ const Profile = ({ currentUser, removeCookie }) => {
         <Typography variant="h4">Profile</Typography>
         <Card sx={{ mt: 2, border: '1px solid #ccc', borderRadius: 2, p: 2, bgcolor: '#6db073' }}>
             <Typography variant="h6" gutterBottom>
-            {`${currentUser.first_name} ${currentUser.last_name}`}
+            {`${currentUser?.first_name} ${currentUser?.last_name}`}
             </Typography>
             <Typography variant="body1">
-            Handicap: {currentUser.handicap || 'N/A'}
+              Handicap: {currentUser?.handicap || 'N/A'}
             </Typography>
         </Card>
       </CardContent>

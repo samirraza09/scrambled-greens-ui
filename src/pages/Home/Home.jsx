@@ -10,13 +10,11 @@ const Home = ({userCookies, removeCookie}) => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    if (currentUser.username = 'refreshed') {
-      if (!userCookies) {
-        navigate('/login')
-      }
-      setCurrentUser(userCookies)
+    if (!userCookies) {
+      navigate('/login')
     }
-  }, [currentUser])
+    setCurrentUser(userCookies)
+  }, [])
 
   return (
     <Container sx={{ mt: 4 }}>
@@ -25,7 +23,7 @@ const Home = ({userCookies, removeCookie}) => {
           <Profile currentUser={currentUser} removeCookie={removeCookie}/>
         </Grid>
         <Grid item xs={12}>
-          <Courses courses={currentUser.courses} />
+          <Courses courses={currentUser?.courses} />
         </Grid>
       </Grid>
     </Container>

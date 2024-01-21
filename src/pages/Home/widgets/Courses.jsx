@@ -1,19 +1,28 @@
-import React from 'react';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import React, {useState} from 'react';
+import { Card, CardContent, Typography, Button, Box, TextField } from '@mui/material';
 
 const Courses = ({ courses }) => {
+  const [showCreateCourse, setShowCreateCoruse] = useState(false);
+  const [courseButtonText, setCourseButtonText] = useState('Add Course');
+  const [courseButtonColor, setCourseButtonColor] = useState('primary');
   const handleAddCourse = () => {
-    // Handle logic for adding a course
-    console.log('Add Course button clicked!');
+    if (!showCreateCourse) {
+      setShowCreateCoruse(true)
+      setCourseButtonText('X')
+      setCourseButtonColor('secondary')
+    } else {
+      setShowCreateCoruse(false)
+      setCourseButtonText('Add Course')
+      setCourseButtonColor('primary')
+    }
   };
 
   return (
     <Card sx={{ borderRadius: 2, p: 2, bgcolor: '#618264', position: 'relative' }}>
-      {/* Add Course button in the top right */}
       <Button
         onClick={handleAddCourse}
         variant="contained"
-        color="primary"
+        color={courseButtonColor}
         sx={{
           backgroundColor: '#4caf50', 
           color: '#fff',
@@ -23,13 +32,39 @@ const Courses = ({ courses }) => {
           m: 4,
         }}
       >
-        Add Course
+        {courseButtonText}
       </Button>
 
       <CardContent>
         <Typography variant="h4" sx={{ mb: 2 }}>
           Courses
         </Typography>
+        {showCreateCourse &&  <Box
+          component="form"
+          noValidate
+          onSubmit={() => {}}
+          sx={{ width: '100%' }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="createCourseName"
+            label="Name"
+            name="createCourseName"
+            autoFocus
+            value={"yourmom"}
+            onChange={() => {}}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ marginTop: 3, backgroundColor: '#4caf50', color: '#fff' }}
+          >
+            Login
+          </Button>
+        </Box>}
         {courses?.map((course) => (
           <Card
             key={course.id}
